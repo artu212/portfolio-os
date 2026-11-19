@@ -152,3 +152,14 @@ button:focus-visible, a:focus-visible {
         scroll-behavior: auto !important;
     }
 }
+
+/* Mobile: evita zoom por toque duplo nos controles, preservando pinch zoom. */
+button, a, .app-icon {
+    touch-action: manipulation;
+}
+
+/* Quando uma janela estiver aberta, apenas o conteúdo dela rola. */
+html.window-open, body.window-open {
+    overflow: hidden;
+    overscroll-behavior: none;
+}

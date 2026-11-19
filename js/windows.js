@@ -76,6 +76,13 @@ const layer = document.getElementById('window-layer');
 const openWindows = new Map();
 let topZ = 20;
 
+function syncScrollLock() {
+    const hasWindows = openWindows.size > 0;
+    document.documentElement.classList.toggle('window-open', hasWindows);
+    document.body.classList.toggle('window-open', hasWindows);
+}
+
+
 function focusWindow(id) {
     const entry = openWindows.get(id);
     if (!entry) return;
@@ -88,6 +95,7 @@ function closeWindow(id) {
     if (!entry) return;
     entry.window.remove();
     openWindows.delete(id);
+    syncScrollLock();
 }
 
 function openWindow(id) {
@@ -104,6 +112,7 @@ function openWindow(id) {
     win.innerHTML = `<header class="window-header"><span class="window-title">${app.title}</span><div class="window-controls"><button type="button" class="close" aria-label="Fechar ${app.title}">×</button></div></header><div class="window-body">${app.content}</div>`;
     layer.append(win);
     openWindows.set(id, {window: win});
+    syncScrollLock();
     win.querySelector('.close').addEventListener('click', () => closeWindow(id));
     win.addEventListener('pointerdown', () => focusWindow(id));
     focusWindow(id);
