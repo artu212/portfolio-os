@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+    color-scheme: dark;
+    --bg: #0b1120;
+    --panel: #151f32;
+    --panel2: #1d2a40;
+    --blue: #38bdf8;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --border: rgba(148, 163, 184, .2);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Inter, Arial, sans-serif;
+}
+
+button, a {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: var(--blue);
+}
+
+button:focus-visible, a:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+.eyebrow {
+    color: var(--blue);
+    font: 500 .76rem 'JetBrains Mono', monospace;
+    letter-spacing: .13em;
+}
+
+.btn {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 18px;
+    font-weight: 600;
+    transition: transform .2s, border-color .2s, background .2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--blue);
+}
+
+.btn-primary {
+    color: #07121f;
+    background: var(--blue);
+    border-color: var(--blue);
+}
+
+.btn-ghost {
+    color: var(--text);
+    background: rgba(148, 163, 184, .08);
+}
+
+.boot-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: radial-gradient(circle at 50% 35%, #162c4c, var(--bg) 65%);
+}
+
+.boot-content {
+    text-align: center;
+    width: min(420px, 100%);
+}
+
+.boot-logo {
+    margin: 0 auto 24px;
+    display: grid;
+    place-items: center;
+    width: 76px;
+    height: 76px;
+    border: 1px solid rgba(56, 189, 248, .45);
+    border-radius: 22px;
+    color: var(--blue);
+    font: 700 2rem 'JetBrains Mono', monospace;
+    box-shadow: 0 0 50px rgba(56, 189, 248, .13);
+}
+
+.boot-content h1 {
+    font-size: clamp(2.3rem, 8vw, 3.7rem);
+    margin: 8px 0;
+    letter-spacing: -.06em;
+}
+
+.boot-content h1 span {
+    color: var(--blue);
+}
+
+.boot-content > p:not(.eyebrow) {
+    color: var(--muted);
+}
+
+.progress-track {
+    margin: 34px 0 22px;
+    height: 5px;
+    overflow: hidden;
+    background: #25334b;
+    border-radius: 10px;
+}
+
+.progress-bar {
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #0284c7, var(--blue));
+    transition: width .12s linear;
+}
+
+.boot-screen.is-leaving {
+    animation: fadeOut .35s ease forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
