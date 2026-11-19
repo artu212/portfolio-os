@@ -54,31 +54,54 @@
     }
 }
 
-/* Correções mobile v1.0.1: rolagem única e janela dentro da viewport. */
+/* Portfolio.OS v1.0.2 — rolagem e gestos no celular.
+   Uma única rolagem no desktop; quando uma janela abre, somente ela rola.
+   manipulation evita o zoom por toque duplo e mantém o zoom por pinça. */
 @media (max-width: 760px) {
-    html, body {
+    html {
         width: 100%;
-        max-width: 100%;
-        overflow-x: clip;
+        height: 100%;
+        overflow: hidden;
+        overscroll-behavior: none;
+        touch-action: manipulation;
+    }
+
+    body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        overscroll-behavior: none;
+        touch-action: manipulation;
     }
 
     .desktop {
-        overflow-x: clip;
-        overflow-y: visible;
-        min-height: 100dvh;
+        position: relative;
+        width: 100%;
+        height: 100vh; /* fallback para navegadores antigos */
+        height: 100dvh;
+        min-height: 0;
+        padding-bottom: 35px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior-y: contain;
+        -webkit-overflow-scrolling: touch;
+        touch-action: manipulation;
+    }
+
+    /* A classe window-open já é controlada por js/windows.js na v1.0.1. */
+    html.window-open .desktop {
+        overflow: hidden;
     }
 
     .os-window {
         position: fixed;
         inset: 10px;
-        top: 10px;
-        left: 10px;
-        bottom: 10px;
         width: auto;
         height: auto;
         max-height: none;
         transform: none;
         overflow: hidden;
+        touch-action: manipulation;
     }
 
     .window-header {
@@ -88,9 +111,15 @@
     .window-body {
         flex: 1 1 auto;
         min-height: 0;
-        overflow-y: auto;
+        padding: 18px;
         overflow-x: hidden;
+        overflow-y: auto;
         overscroll-behavior-y: contain;
         -webkit-overflow-scrolling: touch;
+        touch-action: manipulation;
+    }
+
+    button, a, .app-icon {
+        touch-action: manipulation;
     }
 }
